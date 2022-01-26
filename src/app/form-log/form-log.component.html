@@ -1,0 +1,11 @@
+<form [formGroup]="formLogin">
+  <mat-form-field>
+    <mat-label>login</mat-label>
+    <input matInput formControlName="login" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>password</mat-label>
+    <input matInput formControlName="mdp" type="password">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="connection()">Se connecter</button>
+</form>

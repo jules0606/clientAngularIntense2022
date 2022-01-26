@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn = false;
+  public loggedIn = false;
+  public url = "http://localhost:8010/api/utilisateurs/";
 
-  logIn() {
-    // typiquement, on devrait prendre en paramètres
-    // login et password, vérifier qu'ils sont valides
-    // en utilisant un web service en ligne (soit via une BD)
-    // soit via oAuth, etc.
+  constructor(private http:HttpClient) {
+  }
 
-    // Nous pour le moment, on simule...
-    this.loggedIn = true;
+  logIn(login: string, mdp: string): Observable<string>{
+    return this.http.get<string>(this.url + login + '/' + mdp);
   }
 
   logOut() {
-    // appelée typiquement par le bouton de deconnexion
-
     this.loggedIn = false;
   }
 
@@ -30,5 +28,4 @@ export class AuthService {
     return isUserAdmin;
   }
 
-  constructor() { }
 }

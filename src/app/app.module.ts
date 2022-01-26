@@ -14,23 +14,24 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { HttpClientModule } from '@angular/common/http';
-
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
+import { FormLogComponent } from './form-log/form-log.component';
+import {MatSortModule} from "@angular/material/sort";
 
 const routes:Routes = [
   {
     path:"",
-    component: AssignmentsComponent
+    component: FormLogComponent
   },
   {
-    path:"home",
+    path:"assignments",
     component: AssignmentsComponent
   },
   {
@@ -54,16 +55,17 @@ const routes:Routes = [
     RenduDirective,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssignmentComponent
+    EditAssignmentComponent,
+    FormLogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule, MatIconModule, MatDividerModule,
-    FormsModule, MatInputModule, MatDatepickerModule,
+    ReactiveFormsModule, FormsModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes), MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

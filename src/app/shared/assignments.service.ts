@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
 import { bdInitialAssignments } from './data';
@@ -15,8 +15,8 @@ export class AssignmentsService {
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
-  //url = "http://localhost:8010/api/assignments";
-  url = "https://api-intense2022.herokuapp.com/api/assignments";
+  url = "http://localhost:8010/api/assignments";
+  //url = "https://api-intense2022.herokuapp.com/api/assignments";
 
   getAssignments():Observable<Assignment[]> {
     // return of(this.assignments);
