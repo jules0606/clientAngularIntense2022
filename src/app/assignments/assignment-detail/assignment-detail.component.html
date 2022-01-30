@@ -1,27 +1,31 @@
 <mat-card *ngIf="assignmentTransmis">
   <div class="content">
-  <mat-card-title>{{assignmentTransmis.auteur}}</mat-card-title>
-  <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+  <mat-card-title>Auteur : {{assignmentTransmis.auteur}}</mat-card-title>
+  <mat-card-subtitle>Date de rendu :{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
   <mat-card-content>
-    {{assignmentTransmis.nom}}
+    nom du devoir: {{assignmentTransmis.nom}}
   </mat-card-content>
-  <mat-card-content>
-    {{assignmentTransmis.note}}
+  <mat-card-content *ngIf="assignmentTransmis.note && assignmentTransmis.note >= 0">
+    note : {{assignmentTransmis.note}}
   </mat-card-content>
-  <mat-card-content>
-    {{assignmentTransmis.remarques}}
+  <mat-card-content *ngIf="assignmentTransmis.remarques">
+   remarques : {{assignmentTransmis.remarques}}
   </mat-card-content>
-    <mat-card-content *ngIf="assignmentTransmis.matiere">
-      {{assignmentTransmis.matiere.nom}}
-      {{assignmentTransmis.matiere.urlImageMatiere}}
-      {{assignmentTransmis.matiere.urlPhotoProf}}
-    </mat-card-content>
+    <ng-container *ngIf="assignmentTransmis.matiere">
+      <mat-card-content>
+      nom de la matière : {{assignmentTransmis.matiere.nom}}
+      </mat-card-content>
+      <mat-card-content>
+        <img [src]="assignmentTransmis.matiere.urlImageMatiere" alt="image de la matiere">
+      </mat-card-content>
+      <mat-card-content>
+        <img [src]="assignmentTransmis.matiere.urlPhotoProf" alt="image du professeur">
+      </mat-card-content>
+    </ng-container>
   </div>
   <div class="bottom">
-    <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-      Rendu
-    </mat-checkbox>
-
+    <mat-checkbox *ngIf="!assignmentTransmis.rendu && (assignmentTransmis.note && assignmentTransmis.note >= 0)"
+                  (click)="onAssignmentRendu()">Rendu</mat-checkbox>
     <nav>
         <button [disabled]="!isAdmin()" mat-stroked-button color="accent" (click)="onClickEdit()">
           EDIT

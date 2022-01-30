@@ -32,6 +32,7 @@ export class AssignmentDetailComponent implements OnInit {
     .subscribe(assignment => {
       // on utilise this.assignmentTransmis puisque c'est la propriété
       // utilisée dans le template HTML
+      // @ts-ignore
       this.assignmentTransmis = assignment;
     })
   }
@@ -63,7 +64,7 @@ export class AssignmentDetailComponent implements OnInit {
 
         // on affiche liste. Comme on est dans le subscribe, on est sur
         // que les données sont à jour et que l'assignment a été supprimé !
-        this.router.navigate(["/home"]);
+        this.router.navigate(["/assignments"]);
       })
     }
   }

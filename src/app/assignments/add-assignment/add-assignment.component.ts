@@ -52,7 +52,7 @@ export class AddAssignmentComponent implements OnInit {
     this.assignmentService.addAssignment(newAssignment)
     .subscribe(reponse => {
       console.log(reponse);
-      this.router.navigate(["/assignment/:" + reponse._id]);
+      this.router.navigate(["/assignment/" + reponse._id]);
     });
   }
 }
