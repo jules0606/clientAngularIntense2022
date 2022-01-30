@@ -8,7 +8,8 @@ import {User} from "../form-log/form-log.component";
 })
 export class AuthService {
   public loggedIn = false;
-  public url = "http://localhost:8010/api/utilisateurs";
+//  public url = "http://localhost:8010/api/utilisateurs";
+  public url = "https://jules0606_api_2022.herokuapp.com/api/utilisateurs";
   private userAdmin: boolean = false;
   private JWT: string = '';
 

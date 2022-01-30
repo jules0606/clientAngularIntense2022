@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 
 export class MatiereService {
 
-  url = "http://localhost:8010/api/matieres";
+  url = "https://jules0606_api_2022.herokuapp.com/api/matieres";
 
   constructor(private http:HttpClient) { }
 
