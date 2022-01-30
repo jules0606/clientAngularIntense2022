@@ -1,3 +1,6 @@
+#lien du projet :
+https://jules0606-client-2022.herokuapp.com/
+
 # Réalisations de l'équipe 
 
 Authentification : on renvoie le JWT, et si le user est admin ou pas (necessaire pour edit)
