@@ -1,6 +1,8 @@
 #lien du projet :
 https://jules0606-client-2022.herokuapp.com/
 
+##Projet réalisé par Jules Baumann et Julien Ferriol, M2 INTENSE à Sophia-antipolis
+
 # Réalisations de l'équipe 
 
 Authentification : on renvoie le JWT, et si le user est admin ou pas (necessaire pour edit)
