@@ -7,13 +7,13 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
   public loggedIn = false;
-  public url = "http://localhost:8010/api/utilisateurs/";
+  public url = "http://localhost:8010/api/utilisateurs";
 
   constructor(private http:HttpClient) {
   }
 
   logIn(login: string, mdp: string): Observable<string>{
-    return this.http.get<string>(this.url + login + '/' + mdp);
+    return this.http.post<string>(this.url, {login, mdp});
   }
 
   logOut() {

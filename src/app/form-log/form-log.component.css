@@ -1,0 +1,22 @@
+.mat-card{
+  margin: 0 auto;
+  width: 25%;
+  justify-content: center;
+}
+
+.form {
+  display:flex;
+  flex-direction: column;
+  margin:5px;
+}
+
+.fields {
+  flex-direction: row-reverse;
+  width: 50px;
+  height: 150px;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
