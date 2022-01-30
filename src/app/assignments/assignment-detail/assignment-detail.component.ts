@@ -47,7 +47,7 @@ export class AssignmentDetailComponent implements OnInit {
             console.log(reponse.message);
             // on est dans le subscribe, on est sur que la base de données a été
             // mise à jour....
-            this.router.navigate(["/home"]);
+            this.router.navigate(["/assignments"]);
           })
       }
     }
