@@ -24,6 +24,9 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { AuthGuard } from './shared/auth.guard';
 import { FormLogComponent } from './form-log/form-log.component';
 import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 const routes:Routes = [
   {
@@ -65,7 +68,7 @@ const routes:Routes = [
     ReactiveFormsModule, FormsModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatSortModule
+    RouterModule.forRoot(routes), MatSortModule, MatTableModule, MatPaginatorModule, MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
