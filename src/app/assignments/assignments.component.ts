@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
+import {Router} from "@angular/router";
+import {DateFromDDMMYYYY} from "../shared/date-utils";
 
 @Component({
   selector: 'app-assignments',
@@ -20,7 +22,7 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage: boolean = false;
   nextPage: number = 0;
 
-  constructor(private assignmentService: AssignmentsService) {}
+  constructor(private assignmentService: AssignmentsService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAssignments();
@@ -30,6 +32,12 @@ export class AssignmentsComponent implements OnInit {
     this.assignmentService.getAssignmentsPagine(this.page, this.limit).subscribe((data) => {
       // le tableau des assignments est maintenant ici....
       this.assignments = data.docs;
+      //on transform la Date en vrai format Date pour l'affichage
+      this.assignments.forEach(assign => {
+        if(assign.dateDeRendu) {
+          assign.dateDeRendu = DateFromDDMMYYYY(assign.dateDeRendu);
+        }
+      });
       this.page = data.page;
       this.limit = data.limit;
       this.totalDocs = data.totalDocs;
@@ -38,6 +46,7 @@ export class AssignmentsComponent implements OnInit {
       this.prevPage = data.prevPage;
       this.hasNextPage = data.hasNextPage;
       this.nextPage = data.nextPage;
+      console.log(this.assignments);
     });
   }
 
@@ -66,7 +75,15 @@ export class AssignmentsComponent implements OnInit {
       this.getAssignments();
   }
 
-  changeLimit() {
-    this.getAssignments();
+  remplirBD() {
+    //this.assignmentsService.peuplerBD();
+
+    this.assignmentService.peuplerBDAvecForkJoin().subscribe(() => {
+      console.log('LA BASE EST ENTIEREMENT REMPLIE AVEC LES DONNEES DE TEST');
+
+      // replaceUrl = true = force le refresh, même si
+      // on est déjà sur la page d’accueil
+      this.router.navigate(['/assignments'], { replaceUrl: true });
+    });
   }
 }

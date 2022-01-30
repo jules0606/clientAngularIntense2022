@@ -28,7 +28,7 @@ export class AssignmentsService {
     return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}`);
   }
 
-  getAssignment(id:number):Observable<Assignment|undefined> {
+  getAssignment(id:string):Observable<Assignment|undefined> {
     //let assignment = this.assignments.find(elem => elem.id === id);
 
     //return of(assignment);

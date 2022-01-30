@@ -33,7 +33,7 @@
 </div>
   <mat-list *ngFor="let assignment of assignments">
     <nav>
-      <a routerLink="/assignment/{{assignment.id}}">
+      <a routerLink="/assignment/{{assignment._id}}">
         <h3 mat-subheader>Date de rendu : {{assignment.dateDeRendu | date}}</h3>
         <mat-list-item>
           <p *ngIf="assignment.rendu; else nonsoumis" appRendu>

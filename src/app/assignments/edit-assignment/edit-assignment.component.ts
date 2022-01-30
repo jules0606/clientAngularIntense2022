@@ -33,7 +33,7 @@ export class EditAssignmentComponent implements OnInit {
     // récupère l'id dans l'URL
     const id = +this.route.snapshot.params['id'];
 
-    this.assignmentService.getAssignment(id)
+    this.assignmentService.getAssignment(id.toString())
     .subscribe(assignment => {
       // Pour que la "vue" affiche les informations
       // de l'assignment qu'on édite....
