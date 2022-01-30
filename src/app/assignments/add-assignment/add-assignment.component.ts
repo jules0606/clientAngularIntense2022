@@ -55,4 +55,8 @@ export class AddAssignmentComponent implements OnInit {
       this.router.navigate(["/assignment/" + reponse._id]);
     });
   }
+
+  goToAssignments() {
+    this.router.navigate(["/assignments"]);
+  }
 }
