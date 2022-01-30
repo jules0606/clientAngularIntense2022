@@ -76,7 +76,7 @@ export class AssignmentsService {
 
       this.addAssignment(a)
       .subscribe(reponse => {
-        console.log(reponse.nom + " inséré dans la BD");
+        console.log(reponse?.nom + " inséré dans la BD");
       })
     })
   }
