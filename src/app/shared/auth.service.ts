@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {User} from "../form-log/form-log.component";
 
 @Injectable({
   providedIn: 'root'
@@ -8,24 +9,30 @@ import {Observable} from "rxjs";
 export class AuthService {
   public loggedIn = false;
   public url = "http://localhost:8010/api/utilisateurs";
+  private userAdmin: boolean = false;
+  private JWT: string = '';
 
   constructor(private http:HttpClient) {
   }
 
-  logIn(login: string, mdp: string): Observable<string>{
-    return this.http.post<string>(this.url, {login, mdp});
+  logIn(login: string, mdp: string): Observable<User>{
+    return this.http.post<User>(this.url, {login, mdp});
   }
 
   logOut() {
     this.loggedIn = false;
   }
 
+  setAdmin(bool: boolean) {
+    this.userAdmin = bool;
+  }
+
   isAdmin() {
-    let isUserAdmin = new Promise((resolve, reject) => {
-      resolve(this.loggedIn);
-    });
-    // renvoie une promesse !
-    return isUserAdmin;
+    return this.userAdmin;
+  }
+
+  setJWT(jwt: string) {
+    this.JWT = jwt;
   }
 
 }

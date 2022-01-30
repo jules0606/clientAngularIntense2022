@@ -1,11 +1,16 @@
+export class Matiere {
+  nom!: string;
+  urlPhotoProf!: string;
+  urlImageMatiere!: string;
+}
+
 export class Assignment {
   nom!:string;
   dateDeRendu!:Date;
   rendu!:boolean;
-  id?:number;
   _id?:string;
   auteur!: String;
-  Matiere?: any;
+  matiere?: Matiere;
   note!: Number;
   remarques!: String;
 }

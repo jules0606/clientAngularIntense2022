@@ -1,33 +1,55 @@
-.rendu {
-  color:green;
-}
-
-.nonRendu {
-  color:red;
-  background-color: yellow;
-  border : 3px dashed purple;
-}
-
-.important {
-   font-size: 40px;
- }
-
- .container {
-   display:flex;
-   flex-direction: column;
- }
-
- .ajouterBtn {
-   align-self: flex-end;
- }
-
- .pagination {
-   width:500px;
-  display:flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
 table {
   width: 100%;
 }
+
+.mat-table {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.tabHeader {
+  background-color: #f84483;
+  font-weight: bold;
+}
+.mat-header-cell {
+  color: white;
+}
+.mat-header-row {
+  min-height: 45px;
+}
+
+.mat-row {
+  min-height: 25px;
+  border-bottom: transparent;
+}
+
+.mat-row:nth-child(even){
+  background-color: lightyellow;
+}
+
+.mat-row:nth-child(odd){
+  background-color: whitesmoke;
+}
+
+.mat-row:nth-child(even):hover, .mat-row:nth-child(odd):hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+.mat-cell {
+  color: #3F3A3F;
+  font-size: 12px;
+}
+
+.filter-input::placeholder {
+  color: gray;
+  opacity: 50%;
+}
+
+.mat-toolbar-row{
+  background-color: aliceblue;
+  max-height: 70px;
+  justify-content: space-between;
+}
+
+mat-paginator {background-color: transparent}

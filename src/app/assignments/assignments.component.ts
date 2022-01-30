@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {DateFromDDMMYYYY} from "../shared/date-utils";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {$e} from "@angular/compiler/src/chars";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
@@ -26,6 +25,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   hasNextPage: boolean = false;
   nextPage: number = 0;
   isRenduFilterChecked = false;
+  filterNomDevoir: string = '';
 
   @ViewChild(MatTable, {static: false}) table?: MatTable<Assignment>;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -54,7 +54,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
 
   getAssignments() {
-    this.assignmentService.getAssignmentsPagine(this.page, this.limit, this.isRenduFilterChecked).subscribe((data) => {
+    this.assignmentService.getAssignmentsPagine(this.page, this.limit, this.isRenduFilterChecked, this.filterNomDevoir).subscribe((data) => {
       // le tableau des assignments est maintenant ici....
       this.assignments = data.docs;
       //on transform la Date en vrai format Date pour l'affichage

@@ -18,10 +18,7 @@ export class AuthGuard implements CanActivate {
     // si on associe ce gardien à des routes
     // on aura le droit d'y aller que si on renvoie true
     //return true;
-
-    return this.authService.isAdmin()
-    .then(authentifie => {
-      if(authentifie) {
+      if(this.authService.isAdmin()) {
         console.log("Authentifié, navigation autorisée")
         return true;
       }
@@ -34,8 +31,6 @@ export class AuthGuard implements CanActivate {
 
         return false;
       }
-    })
-
   }
 
 }

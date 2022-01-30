@@ -27,6 +27,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSelectModule} from "@angular/material/select";
 
 const routes:Routes = [
   {
@@ -61,15 +62,15 @@ const routes:Routes = [
     EditAssignmentComponent,
     FormLogComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule, MatIconModule, MatDividerModule,
-    ReactiveFormsModule, FormsModule, MatInputModule, MatDatepickerModule,
-    MatNativeDateModule, MatListModule, MatCardModule,
-    MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatSortModule, MatTableModule, MatPaginatorModule, MatToolbarModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule, MatIconModule, MatDividerModule,
+        ReactiveFormsModule, FormsModule, MatInputModule, MatDatepickerModule,
+        MatNativeDateModule, MatListModule, MatCardModule,
+        MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
+        RouterModule.forRoot(routes), MatSortModule, MatTableModule, MatPaginatorModule, MatToolbarModule, MatSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

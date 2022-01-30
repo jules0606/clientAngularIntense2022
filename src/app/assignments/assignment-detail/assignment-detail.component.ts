@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
@@ -35,21 +34,21 @@ export class AssignmentDetailComponent implements OnInit {
       // utilisée dans le template HTML
       this.assignmentTransmis = assignment;
     })
-
   }
-  onAssignmentRendu() {
-    this.assignmentTransmis!.rendu = true;
 
-    if(this.assignmentTransmis) {
-      this.assignmentService.updateAssignment(this.assignmentTransmis)
-      .subscribe(reponse => {
-        console.log(reponse.message);
-        // on est dans le subscribe, on est sur que la base de données a été
-        // mise à jour....
-        this.router.navigate(["/home"]);
-      })
-      // PAS BON SI ICI car on n'a pas la garantie que les données ont été updatées
-      // this.router.navigate(["/home"]);
+  onAssignmentRendu() {
+    if(this.assignmentTransmis!.note) {
+      this.assignmentTransmis!.rendu = true;
+
+      if(this.assignmentTransmis) {
+        this.assignmentService.updateAssignment(this.assignmentTransmis)
+          .subscribe(reponse => {
+            console.log(reponse.message);
+            // on est dans le subscribe, on est sur que la base de données a été
+            // mise à jour....
+            this.router.navigate(["/home"]);
+          })
+      }
     }
   }
 
@@ -71,7 +70,7 @@ export class AssignmentDetailComponent implements OnInit {
 
   onClickEdit() {
     // correspond à /assignment/1/edit?nom=Buffa&prenom=Michel#edit
-    this.router.navigate(['/assignment', this.assignmentTransmis?.id, 'edit'],
+    this.router.navigate(['/assignment', this.assignmentTransmis?._id, 'edit'],
                         {
                           queryParams: {
                             nom:'Buffa',
@@ -82,6 +81,10 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.authService.loggedIn;
+    return this.authService.isAdmin();
+  }
+
+  retourAsssignments() {
+    this.router.navigate(['/assignments']);
   }
 }

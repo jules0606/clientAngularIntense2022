@@ -24,8 +24,8 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.url);
   }
 
-  getAssignmentsPagine(page:number, limit:number, checked: boolean):Observable<any> {
-    return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&onlyRendu=${checked}`);
+  getAssignmentsPagine(page:number, limit:number, checked: boolean, nomDevoir: string):Observable<any> {
+    return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&onlyRendu=${checked}&nomDevoir=${nomDevoir}`);
   }
 
   getAssignment(id:string):Observable<Assignment|undefined> {
@@ -36,7 +36,7 @@ export class AssignmentsService {
     return this.http.get<Assignment>(this.url + "/" + id);
   }
 
-  addAssignment(assignment:Assignment):Observable<any>{
+  addAssignment(assignment:Assignment):Observable<Assignment>{
     //this.assignments.push(assignment);
 
     this.loggingService.log(assignment.nom, "ajouté");
@@ -73,11 +73,10 @@ export class AssignmentsService {
       a.nom = assignment.nom;
       a.dateDeRendu = new Date(assignment.dateDeRendu);
       a.rendu = assignment.rendu;
-      a.id = assignment.id;
 
       this.addAssignment(a)
       .subscribe(reponse => {
-        console.log(assignment.nom + " inséré dans la BD");
+        console.log(reponse.nom + " inséré dans la BD");
       })
     })
   }
@@ -89,7 +88,6 @@ export class AssignmentsService {
     bdInitialAssignments.forEach((a) => {
       const nouvelAssignment = new Assignment();
 
-      nouvelAssignment.id = a.id;
       nouvelAssignment.nom = a.nom;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
       nouvelAssignment.rendu = a.rendu;

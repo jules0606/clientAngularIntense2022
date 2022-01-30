@@ -12,11 +12,16 @@
   <div class="mat-elevation-z8">
 
     <mat-toolbar>
-      <mat-paginator [pageSizeOptions]="[25, 50]"
-                     showFirstLastButtons [length]="totalDocs"
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>
-      <mat-checkbox (change)="RequestFilterDevoirRendu($event)">Montrer uniquement les devoirs Rendus</mat-checkbox>
+      <mat-toolbar-row>
+        <mat-form-field appearance="standard">
+          <input matInput class="filter-input" [(ngModel)]="filterNomDevoir" placeholder="nom du devoir" (input)="getAssignments()">
+        </mat-form-field>
+        <mat-checkbox (change)="RequestFilterDevoirRendu($event)">Montrer uniquement les devoirs Rendus</mat-checkbox>
+        <mat-paginator [pageSizeOptions]="[25, 50]"
+                       showFirstLastButtons [length]="totalDocs"
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </mat-toolbar-row>
     </mat-toolbar>
 
     <table mat-table [dataSource]="dataSource" *ngIf="assignments">
@@ -45,7 +50,7 @@
         <td mat-cell *matCellDef="let element"> {{element.rendu}} </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-header-row class="tabHeader" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToAssignment(row)"></tr>
     </table>
 

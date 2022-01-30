@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { Assignment } from '../assignment.model';
+import {Assignment, Matiere} from '../assignment.model';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatiereService} from "../../shared/matiere.service";
 
 @Component({
   selector: 'app-add-assignment',
@@ -11,30 +13,46 @@ import { Assignment } from '../assignment.model';
 export class AddAssignmentComponent implements OnInit {
 
   // associées au champs input du formulaire
-  nomDevoir = "";
-  dateDeRendu!:Date;
+  public formAddAssignment: FormGroup;
+  public matieres?: Matiere[];
 
-  constructor(private assignmentService:AssignmentsService,
-    private router:Router) { }
+  constructor(private assignmentService:AssignmentsService, private matiereService: MatiereService,
+    private router:Router, private formBuilder: FormBuilder) {
+    this.formAddAssignment = this.formBuilder.group( {
+      nomDevoir: '',
+      dateDeRendu: '',
+      nomAuteur: '',
+      matiere: '',
+      remarques: ''
+    });
+    this.formAddAssignment.get('nomDevoir')?.setValidators(Validators.required);
+    this.formAddAssignment.get('dateDeRendu')?.setValidators(Validators.required);
+    this.formAddAssignment.get('nomAuteur')?.setValidators(Validators.required);
+    this.formAddAssignment.get('matiere')?.setValidators(Validators.required);
+  }
 
   ngOnInit(): void {
+    this.matiereService.getMatieres().subscribe( matieres => {
+      this.matieres = matieres;
+    })
   }
 
   onSubmit() {
-    console.log("NOM = " + this.nomDevoir);
-    console.log("DATE = " + this.dateDeRendu);
+    console.log("NOM = " + this.formAddAssignment.value.nomDevoir);
+    console.log("DATE = " + this.formAddAssignment.value.dateDeRendu);
 
     const newAssignment = new Assignment();
-    newAssignment.id = Math.round(Math.random()*100000);
-    newAssignment.nom = this.nomDevoir;
-    newAssignment.dateDeRendu = this.dateDeRendu;
+    newAssignment.nom = this.formAddAssignment.value.nomDevoir;
+    newAssignment.auteur = this.formAddAssignment.value.nomAuteur;
+    newAssignment.dateDeRendu = this.formAddAssignment.value.dateDeRendu;
+    newAssignment.matiere = this.formAddAssignment.value.matiere;
+    newAssignment.remarques = this.formAddAssignment.value.remarques;
     newAssignment.rendu = false;
 
     this.assignmentService.addAssignment(newAssignment)
     .subscribe(reponse => {
-      console.log(reponse.message);
-      // maintenant il faut qu'on affiche la liste !!!
-      this.router.navigate(["/home"]);
+      console.log(reponse);
+      this.router.navigate(["/assignment/:" + reponse._id]);
     });
   }
 }
